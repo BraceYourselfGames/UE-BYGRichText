@@ -153,6 +153,12 @@ FReply FBYGRichTextStylesheetCustomization::OnNewStyleButtonClicked()
 {
 	if ( TextStylesheet.IsValid() )
 	{
+
+		UPackage* Pkg = TextStylesheet->GetPackage();
+		//UBYGRichTextStyle* Style = NewObject<UBYGRichTextStyle>( TextStylesheet.Get(), UBYGRichTextStyle::StaticClass(), NAME_None, RF_Standalone | RF_Transactional | RF_Public );
+		// TODO: Not really sure what is the correct package for this style or the properties below
+		UBYGRichTextStyle* Style = NewObject<UBYGRichTextStyle>( TextStylesheet.Get() );
+
 		FName FoundStyleID = NAME_None;
 		for ( int32 i = 1; i < 100; ++i )
 		{
@@ -163,12 +169,6 @@ FReply FBYGRichTextStylesheetCustomization::OnNewStyleButtonClicked()
 				break;
 			}
 		}
-
-		UPackage* Pkg = TextStylesheet->GetPackage();
-		//UBYGRichTextStyle* Style = NewObject<UBYGRichTextStyle>( TextStylesheet.Get(), UBYGRichTextStyle::StaticClass(), NAME_None, RF_Standalone | RF_Transactional | RF_Public );
-		// TODO: Not really sure what is the correct package for this style or the properties below
-		UBYGRichTextStyle* Style = NewObject<UBYGRichTextStyle>( TextStylesheet.Get(), UBYGRichTextStyle::StaticClass(), FoundStyleID, RF_Standalone | RF_Transactional | RF_Public );
-
 		if ( FoundStyleID != NAME_None )
 		{
 			Style->SetID( FoundStyleID );
@@ -178,8 +178,8 @@ FReply FBYGRichTextStylesheetCustomization::OnNewStyleButtonClicked()
 		// Add some sensible defaults, maybe
 		{
 			// TODO: Not really sure what is the correct package for this style or the properties below
-			Style->AddProperty( NewObject<UBYGRichTextColorProperty>( Style, "Prop1", RF_Public ) );
-			Style->AddProperty( NewObject<UBYGRichTextSizeProperty>( Style, "Prop2", RF_Public ) );
+			Style->AddProperty( NewObject<UBYGRichTextSizeProperty>( Style, UBYGRichTextSizeProperty::StaticClass() ) );
+			Style->AddProperty( NewObject<UBYGRichTextColorProperty>( Style, UBYGRichTextColorProperty::StaticClass() ) );
 		}
 
 		TextStylesheet->Styles.Add( Style );
