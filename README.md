@@ -7,7 +7,7 @@ It differs from Unreal's default rich text implementation in a few ways:
 
 * Support for Markdown and customizable markup.
 * Support for nested styles.
-* Simple to implement additional text properties.
+* Simple to extend supported text properties in C++.
 
 ## Feature Comparison
 
@@ -40,14 +40,14 @@ It differs from Unreal's default rich text implementation in a few ways:
 
 #### Rich Text Properties
 
-* **Font/Typeface:** set 
-* **Text style:** bold, italic and other styles
+* **Font/Typeface**
+* **Text style:** bold, italic and other styles.
 * **Text size**
 * **Text color**
 * **Text case:** force uppercase or lowercase
 * **Text shadow (color and distance)**
 * **Margin:** Add spacing between paragraphs.
-* **Justification:** Align text left, right, center.
+* **Justification:** Align text left, right or center.
 * **Line Height:** Change the spacing between lines.
 * **Text Wrap** 
 * **Background:** Set a background color or image.
@@ -55,16 +55,16 @@ It differs from Unreal's default rich text implementation in a few ways:
 ### Using the Rich Text Block
 
 1. Create a UserWidget blueprint.
-2. Add a `BYG Rich Text Block` to the widget.
-3. By default, the stylesheet selected will be the Markdown example included
-   with the project.
+2. From the widget palette, under `Brace Yourself Games`, find `BYG Rich Text Block` and add it to your UserWidget.
+3. By default, the stylesheet selected will be the Markdown example included with the project.
+4. Try entering `Hello *bold world*, hello _italic world_!`
 
 ## Installation
 
 ### Source
 
-1. Download the zip or clone the repository to `ProjectName/Plugins/BYGRichText`
-2. If using C++, add `BYGRichText` to `PrivateDependencyModuleNames` inside `ProjectName.Build.cs`
+1. Download the zip or clone the repository to `ProjectName/Plugins/BYGRichText`.
+2. Add `BYGRichText` to `PrivateDependencyModuleNames` inside `ProjectName.Build.cs`.
 
 ## Unreal Version Support
 
@@ -78,7 +78,7 @@ It differs from Unreal's default rich text implementation in a few ways:
 
 ## Contact
 
-* Created and maintained by [@_benui](https://twitter.com/_benui) at Brace Yourself Games
+* Created and maintained by [@_benui](https://twitter.com/_benui) at [Brace Yourself Games](https://braceyourselfgames.com/)
 
 
 ## FAQ
@@ -99,10 +99,6 @@ to change the appearance of un-tagged text.
 
 **A)** Yes, the license is the [3-clause BSD license](LICENSE) which means it can be used in commercial works so long as the copyright notice is included.
 
-### Q) How come there's no blueprint logic support?
-
-**A)** We are a C++ haven't got round to it yet.
-
 ### Q) Has this been used in any games?
 
 **A)** This is based on the rich text system implemented for [Industries of
@@ -112,3 +108,7 @@ Titan](https://braceyourselfgames.com/industries-of-titan/)
 
 **A)** Currently it is not supported. I am looking into it.
 
+### Q) My text is pink, what's going wrong?
+
+**A)** Make sure that you have selected a **Stylesheet Class** from within the
+**BYG Rich Text Block properties**.
