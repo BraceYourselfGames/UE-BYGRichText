@@ -24,8 +24,8 @@ protected:
 	void AddProperty( int32 InHistoryIdx );
 	void RemoveProperty( int32 InHistoryIdx );
 
-	void OnPropertyValueChanged();
-	void OnChildPropertyValueChanged();
+	//void OnPropertyValueChanged();
+	//void OnChildPropertyValueChanged();
 
 	TSharedPtr<IPropertyHandle> PropertyHandle;
 

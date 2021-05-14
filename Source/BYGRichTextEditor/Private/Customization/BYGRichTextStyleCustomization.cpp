@@ -250,8 +250,8 @@ void FBYGRichTextStyleCustomization::CustomizeDetails( IDetailLayoutBuilder& Det
 				IDetailPropertyRow* NewRow = PropertiesCat.AddExternalObjectProperty( ExternalObjects, TestProperty->GetFName(), PropertyLocation );
 				if ( ensure( NewRow ) )
 				{
-					NewRow->GetPropertyHandle()->SetOnPropertyValueChanged( FSimpleDelegate::CreateSP( this, &FBYGRichTextStyleCustomization::OnPropertyValueChanged ) );
-					NewRow->GetPropertyHandle()->SetOnChildPropertyValueChanged( FSimpleDelegate::CreateSP( this, &FBYGRichTextStyleCustomization::OnChildPropertyValueChanged ) );
+					//NewRow->GetPropertyHandle()->SetOnPropertyValueChanged( FSimpleDelegate::CreateSP( this, &FBYGRichTextStyleCustomization::OnPropertyValueChanged ) );
+					//NewRow->GetPropertyHandle()->SetOnChildPropertyValueChanged( FSimpleDelegate::CreateSP( this, &FBYGRichTextStyleCustomization::OnChildPropertyValueChanged ) );
 				}
 			}
 		}
@@ -372,9 +372,9 @@ TArray<UClass*> FBYGRichTextStyleCustomization::GetUnusedProperties() const
 	return UnusedTextProperties;
 }
 
+#if 0
 void FBYGRichTextStyleCustomization::OnPropertyValueChanged()
 {
-	UE_LOG( LogTemp, Warning, TEXT( "TODO REQUEST UPDATE" ) );
 	if ( TextStyle.IsValid() )
 	{
 		// How is this not being updated?
@@ -383,12 +383,12 @@ void FBYGRichTextStyleCustomization::OnPropertyValueChanged()
 
 void FBYGRichTextStyleCustomization::OnChildPropertyValueChanged()
 {
-	UE_LOG( LogTemp, Warning, TEXT( "TODO CHILD REQUEST UPDATE" ) );
 	if ( TextStyle.IsValid() )
 	{
 		// How is this not being updated?
 	}
 }
+#endif
 
 #undef LOCTEXT_NAMESPACE
 
