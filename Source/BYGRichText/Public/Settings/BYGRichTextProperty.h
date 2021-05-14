@@ -83,10 +83,10 @@ public:
 protected:
 	bool bShouldApplyToDefault = false;
 	// Wuff, mutable here is stinky code
-	UPROPERTY( VisibleAnywhere )
+	UPROPERTY()
 		mutable int32 InlineID = INDEX_NONE;
 	// Wuff, mutable here is stinky code
-	UPROPERTY( VisibleAnywhere )
+	UPROPERTY()
 		mutable FString CachedInlineID;
 	FName TypeID = FName("Base");
 
