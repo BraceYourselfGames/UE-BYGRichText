@@ -74,7 +74,7 @@ It differs from Unreal's default rich text implementation in a few ways:
 ## License
 
 * [3-clause BSD license](LICENSE)
-* Icons by Icons8
+* Some Icons from [Icons8](https://icons8.com/)
 
 ## Contact
 
