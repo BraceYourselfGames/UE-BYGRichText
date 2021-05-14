@@ -467,7 +467,7 @@ TArray<FBYGTextBlockInfo> FBYGRichTextMarkupParser::SplitIntoBlocks( const FStri
 				{
 					j++;
 				}
-				UBYGRichTextStyle* NewStyle = RichTextStylesheet->FindStyle( InputText, j, EBYGStyleDisplayType::Block );
+				const UBYGRichTextStyle* NewStyle = RichTextStylesheet->FindStyle( InputText, j, EBYGStyleDisplayType::Block );
 				if ( NewStyle )
 				{
 					FlushTokenRaw( BlockInfos, CurrentBlockInfo );
@@ -624,33 +624,41 @@ FString FBYGRichTextMarkupParser::ConvertInputToInlineXML( const FString& Input 
 		// Regular text output
 		else
 		{
-			// We only allow Block type at the start of the line
-			TOptional<EBYGStyleDisplayType> DisplayType;
-			if ( i > 0 && InputText[ i - 1 ] != '\n' )
-				DisplayType = EBYGStyleDisplayType::Inline;
+
+			// Block styles cannot come in the middle of a line 
+			const bool bIsStartOfLine = i == 0 || InputText[ i - 1 ] == '\n';
 
 			// Try to pop the current style if it matches
 			if ( !StyleStack.IsEmpty() 
 				&& StyleStack.GetHeadStyle()->HasShortcut()
-				&& StyleStack.GetHeadStyle()->GetDisplayType() == EBYGStyleDisplayType::Inline
+				&& ( StyleStack.GetHeadStyle()->GetDisplayType() == EBYGStyleDisplayType::Inline
+					|| ( StyleStack.GetHeadStyle()->GetDisplayType() == EBYGStyleDisplayType::Block && bIsStartOfLine ) )
 				&& MatchForward( InputText, i, StyleStack.GetHeadStyle()->GetShortcut() ) )
 			{
 				FlushToken( Result, CurrentToken, StyleStack, XMLElementName, CurrentPayload );
 				CurrentPayload.Empty();
 				StyleStack.PopStyle();
-				//i += 1;
 			}
 			else
 			{
+				// When searching for possible styles, optionally set that it *must* be inline (we don't allow block mid-line)
+				TOptional<EBYGStyleDisplayType> DisplayType;
+				if ( i > 0 && InputText[ i - 1 ] != '\n' )
+					DisplayType = EBYGStyleDisplayType::Inline;
 				UBYGRichTextStyle* NewStyle = RichTextStylesheet->FindStyle( InputText, i, DisplayType );
 				if ( NewStyle )
 				{
 					FlushToken( Result, CurrentToken, StyleStack, XMLElementName, CurrentPayload );
 					CurrentPayload.Empty();
+
+					// Skip over the shortcut stuff
+					i += NewStyle->GetShortcutLen() - 1;
+
 					StyleStack.PushStyle( NewStyle );
 				}
 				else
 				{
+
 					// Write the current character into the CurrentToken buffer
 					AppendCharacters( CurrentToken, c );
 				}

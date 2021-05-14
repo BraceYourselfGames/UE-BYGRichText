@@ -123,8 +123,20 @@ bool FBYGRichTextStylesheetIDs::RunTest( const FString& Parameters )
 	{
 		UBYGRichTextStyle* Style = NewObject<UBYGRichTextStyle>();
 		Style->SetID( "h1" );
-		Style->SetDisplayType( EBYGStyleDisplayType::Inline );
+		Style->SetDisplayType( EBYGStyleDisplayType::Block );
 		Style->SetShortcut( "#" );
+		{
+			UBYGRichTextCaseProperty* Case = NewObject<UBYGRichTextCaseProperty>();
+			Case->SetCase( ETextTransformPolicy::ToLower );
+			Style->Properties.Add( Case );
+		}
+		DefaultStylesheet->AddStyle( Style );
+	}
+	{
+		UBYGRichTextStyle* Style = NewObject<UBYGRichTextStyle>();
+		Style->SetID( "h2" );
+		Style->SetDisplayType( EBYGStyleDisplayType::Block );
+		Style->SetShortcut( "##" );
 		{
 			UBYGRichTextCaseProperty* Case = NewObject<UBYGRichTextCaseProperty>();
 			Case->SetCase( ETextTransformPolicy::ToLower );
