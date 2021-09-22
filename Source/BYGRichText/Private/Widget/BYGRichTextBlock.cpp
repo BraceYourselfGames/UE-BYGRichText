@@ -189,16 +189,17 @@ void UBYGRichTextBlock::SetRichTextStylesheetClass( TSubclassOf<UBYGRichTextStyl
 	}
 }
 
-#if WITH_EDITOR
 void UBYGRichTextBlock::OnRichTextStylesheetChanged()
 {
 	RebuildWidget();
 }
 
+#if WITH_EDITOR
 const FText UBYGRichTextBlock::GetPaletteCategory()
 {
 	return LOCTEXT( "BYG", "Brace Yourself Games" );
 }
+#endif
 
 const UBYGRichTextStylesheet* UBYGRichTextBlock::GetRichTextStylesheet() const
 {
@@ -211,6 +212,7 @@ const UBYGRichTextStylesheet* UBYGRichTextBlock::GetRichTextStylesheet() const
 	return RichTextStylesheet;
 }
 
+#if WITH_EDITOR
 void UBYGRichTextBlock::PostEditChangeProperty( struct FPropertyChangedEvent& PropertyChangedEvent )
 {
 	Super::PostEditChangeProperty( PropertyChangedEvent );
@@ -237,7 +239,6 @@ void UBYGRichTextBlock::PostEditChangeProperty( struct FPropertyChangedEvent& Pr
 		TextBlock->Refresh();
 	}
 }
-
 #endif
 
 #undef LOCTEXT_NAMESPACE

@@ -39,6 +39,7 @@ public:
 	UPROPERTY( config, EditAnywhere, Category = Settings )
 		FString ParagraphSeparator;
 
+#if WITH_EDITOR
 	EDataValidationResult IsDataValid( TArray<FText>& ValidationErrors ) override
 	{
 		EDataValidationResult Result = Super::IsDataValid( ValidationErrors );
@@ -58,4 +59,5 @@ public:
 
 		return Result;
 	}
+#endif
 };

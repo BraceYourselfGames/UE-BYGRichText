@@ -8,17 +8,6 @@ public class BYGRichText : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
-		PublicIncludePaths.AddRange(
-			new string[] {
-				// ... add public include paths required here ...
-			}
-			);
-				
-		PrivateIncludePaths.AddRange(
-			new string[] {
-			}
-			);
-		
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
@@ -34,14 +23,12 @@ public class BYGRichText : ModuleRules
 				"Slate",
 				"SlateCore",
 				"UMG",
-				"UnrealEd",
+				//"UnrealEd",
 			}
 			);
-		
-		DynamicallyLoadedModuleNames.AddRange(
-			new string[]
-			{
-			}
-			);
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.Add("UnrealEd");
+		}
 	}
 }

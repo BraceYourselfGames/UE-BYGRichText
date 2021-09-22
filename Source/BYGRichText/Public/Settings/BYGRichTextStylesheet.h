@@ -47,10 +47,10 @@ public:
 	virtual void BeginDestroy() override;
 	virtual void PostLoad() override;
 	virtual void PostCDOContruct() override;
-	virtual bool Modify( bool bAlwaysMarkDirty = true ) override;
 	virtual void PostEditImport() override;
 
 #if WITH_EDITOR
+	virtual bool Modify( bool bAlwaysMarkDirty = true ) override;
 	virtual void PostEditChangeProperty( struct FPropertyChangedEvent& PropertyChangedEvent ) override;
 	virtual void PostEditChangeChainProperty( struct FPropertyChangedChainEvent& PropertyChangedEvent ) override;
 

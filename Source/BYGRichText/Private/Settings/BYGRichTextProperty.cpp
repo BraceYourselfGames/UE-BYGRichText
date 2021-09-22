@@ -30,6 +30,7 @@ void UBYGRichTextPropertyBase::BeginDestroy()
 	Super::BeginDestroy();
 }
 
+#if WITH_EDITOR
 void UBYGRichTextPropertyBase::PostEditChangeProperty( struct FPropertyChangedEvent& PropertyChangedEvent )
 {
 	Super::PostEditChangeProperty( PropertyChangedEvent );
@@ -43,3 +44,4 @@ void UBYGRichTextPropertyBase::PostEditChangeChainProperty( struct FPropertyChan
 
 	OnPropertyPropertyChangedDelegate.ExecuteIfBound();
 }
+#endif

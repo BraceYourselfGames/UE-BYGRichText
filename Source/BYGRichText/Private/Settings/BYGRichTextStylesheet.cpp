@@ -5,7 +5,9 @@
 
 #include <Widgets/SBoxPanel.h>
 #include <Widgets/Text/SRichTextBlock.h>
+#if WITH_EDITOR
 #include <Kismet2/CompilerResultsLog.h>
+#endif
 
 #define LOCTEXT_NAMESPACE "BYGRichTextModule"
 
@@ -294,10 +296,12 @@ void UBYGRichTextStylesheet::RebuildLookup()
 			Prop->SetInlineID( i );
 			i++;
 
+#if WITH_EDITOR
 			Prop->OnPropertyPropertyChangedDelegate.BindLambda( [&]()
 			{
 				OnStylesheetPropertiesChangedDelegate.Broadcast();
 			} );
+#endif
 		}
 	}
 
@@ -357,12 +361,14 @@ void UBYGRichTextStylesheet::BeginDestroy()
 	UE_LOG( LogTemp, Warning, TEXT( "Stylesheet beginning destruction" ) );
 }
 
+#if WITH_EDITOR
 bool UBYGRichTextStylesheet::Modify( bool bAlwaysMarkDirty /*= true */ )
 {
 	bool bFound = Super::Modify( bAlwaysMarkDirty );
 	UE_LOG( LogTemp, Warning, TEXT( "Stylesheet modify" ) );
 	return bFound;
 }
+#endif
 
 void UBYGRichTextStylesheet::PostEditImport()
 {
