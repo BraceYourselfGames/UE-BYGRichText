@@ -9,11 +9,11 @@
 #include "Components/Widget.h"
 #include "Internationalization/TextTransformer.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "UObject/ConstructorHelpers.h"
 #include "Widgets/Images/SImage.h"
 #include "Widgets/SOverlay.h"
 #include "Widgets/Text/SRichTextBlock.h"
 #include "BYGRichTextModule.h"
+#include "BYGRichTextRuntimeSettings.h"
 #include "BYGStyleDisplayType.h"
 
 #include "BYGRichTextProperty.generated.h"
@@ -132,9 +132,12 @@ public:
 	{
 		bShouldApplyToDefault = true;
 		TypeID = "Typeface";
-		static ConstructorHelpers::FObjectFinder<UObject> RobotoFontObj( TEXT( "/Engine/EngineFonts/Roboto" ) );
-		ensure( RobotoFontObj.Object );
-		FontObject = RobotoFontObj.Object;
+		const UBYGRichTextRuntimeSettings* Settings = GetDefault<UBYGRichTextRuntimeSettings>();
+		if ( ensure(Settings ))
+		{
+			FontObject = Settings->FallbackFontPath.TryLoad();
+			ensure(FontObject);
+		}
 	}
 	virtual void ApplyToTextStyle( FTextBlockStyle& Style ) const
 	{

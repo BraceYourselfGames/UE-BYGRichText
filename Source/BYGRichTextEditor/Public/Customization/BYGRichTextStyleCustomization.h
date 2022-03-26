@@ -33,7 +33,7 @@ protected:
 
 	TSharedPtr<class SMenuAnchor> AddPropertyMenuAnchor;
 
-	TWeakObjectPtr<UBYGRichTextStyle> TextStyle;
+	TWeakObjectPtr<class UBYGRichTextStyle> TextStyle;
 
 	TArray<UClass*> GetUnusedProperties() const;
 

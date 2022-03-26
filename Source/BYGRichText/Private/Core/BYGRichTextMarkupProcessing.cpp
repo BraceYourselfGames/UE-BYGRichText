@@ -510,7 +510,7 @@ FString FBYGRichTextMarkupParser::ConvertInputToInlineXML( const FString& Input 
 	}
 
 	// Create the style stack with the defaults from the config
-	const UBYGRichTextRuntimeSettings* Settings = GetMutableDefault<UBYGRichTextRuntimeSettings>();
+	const UBYGRichTextRuntimeSettings* Settings = GetDefault<UBYGRichTextRuntimeSettings>();
 	UBYGRichTextStyle* DefaultStyle = RichTextStylesheet->FindStyle( RichTextStylesheet->GetDefaultStyleName() );
 
 	FBYGStyleStack StyleStack;
