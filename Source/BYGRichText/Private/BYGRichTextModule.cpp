@@ -89,6 +89,11 @@ void FBYGRichTextModule::OnPostEngineInit()
 	}
 }
 
+FString FBYGRichTextModule::GetReferencerName() const
+{
+	return TEXT("FBYGRichTextModule");
+}
+
 void FBYGRichTextModule::AddReferencedObjects( FReferenceCollector& Collector )
 {
 	Collector.AddReferencedObject( FallbackStylesheet );

@@ -16,6 +16,7 @@ public:
 
 	// Begin FGCObject overrides
 	virtual void AddReferencedObjects( FReferenceCollector& Collector ) override;
+	virtual FString GetReferencerName() const override;
 	// End FGCObject overrides
 
 	const FSlateBrush* GetIconBrush( const FString& Path, const FVector2D& MaxSize );
