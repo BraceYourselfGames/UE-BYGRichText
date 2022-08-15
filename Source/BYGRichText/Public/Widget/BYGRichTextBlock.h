@@ -39,9 +39,11 @@ public:
 	virtual void ReleaseSlateResources( bool bReleaseChildren ) override;
 	// End of UVisual interface
 
+	UFUNCTION(BlueprintCallable)
 	void SetText( const FText& InText );
-	inline FText GetText() { return Text; }
 
+	UFUNCTION(BlueprintPure)
+	FText GetText() const { return Text; }
 
 	// TODO should store unmodifiable rich text stylesheet instance in the module?
 	const UBYGRichTextStylesheet* GetRichTextStylesheet() const;
